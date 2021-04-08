@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="container">
+  <div class="section">
+    {{ with .Site.Params.subtitle }}
+    <h3><span class="subtitle text-muted">💀 {{.}} 💀</span></h3>
+    {{ end }}
+
+    <div>{{.Content}}</div>
+  </div>
+  <div class="section">{{- partial "data_table.html" . -}}</div>
+</section>
+
+{{ end }}

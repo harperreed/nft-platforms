@@ -1,0 +1,33 @@
+baseURL: /
+
+publishDir: "public"
+languageCode: en-us
+title: "NFT Platforms"
+
+
+canonifyURLs: true
+enableRobotsTXT: true
+sectionPagesMenu: main
+
+params:
+  ga_id: "UA-xxxxx-xx"
+  description: ""
+  keywords: ""
+  cachebuster: ""
+  # name: "Harper Reed"
+  # email: harper@modest.com
+  # twitter: harper
+
+  base: app9PC1kyGLeAYCxl
+  table: Marketplaces
+
+
+disableKinds:
+  - section
+  - section
+  - taxonomy
+  - taxonomyTerm
+  - rss
+  - section
+  - page
+

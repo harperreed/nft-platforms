@@ -1,0 +1,102 @@
+{{ $apiPrefix := "https://api.airtable.com/v0/"}} {{ $key := getenv
+"AIRTABLE_KEY" }} {{ $results := getJSON $apiPrefix $.Site.Params.base "/"
+$.Site.Params.table "?help=1&api_key=" $key }}
+<div class="table-container">
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Name</th>
+      <th>Short Desc (or USP)</th>
+      <th>Wallet Support</th>
+      <th>Selling</th>
+      <th>Blockchain</th>
+      <th>Required to sell</th>
+      <th>Fee properties</th>
+      <th>IPFS</th>
+      <th>Fees</th>
+      <th>% of Sale</th>
+      <th>Secondary Sales</th>
+      <th>Control of sale</th>
+      <th>Credit Card?</th>
+      <th>Services</th>
+      <th>Focus</th>
+      <th>Token Support</th>
+      <th>Focus</th>
+      <th>Editions</th>
+      <th>1/1</th>
+      <th>Notes</th>
+
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Logo</th>
+      <th>Name</th>
+      <th>Short Desc (or USP)</th>
+      <th>Wallet Support</th>
+      <th>Selling</th>
+      <th>Blockchain</th>
+      <th>Required to sell</th>
+      <th>Fee properties</th>
+      <th>IPFS</th>
+      <th>Fees</th>
+      <th>% of Sale</th>
+      <th>Secondary Sales</th>
+      <th>Control of sale</th>
+      <th>Credit Card?</th>
+      <th>Services</th>
+      <th>Focus</th>
+      <th>Token Support</th>
+      <th>Focus</th>
+      <th>Editions</th>
+      <th>1/1</th>
+      <th>Notes</th>
+      
+    </tr>
+  </tfoot>
+  <tbody>
+    {{ range $results.records }}
+
+    <tr>
+      <th>{{ range (index .fields "Logo" )}}<img src="{{.url}}" />{{end}}</th>
+      <td><a href="{{.fields.URL}}" title="{{.fields.Name}}">{{.fields.Name}}</a>
+      </td>
+      <td>{{ (index .fields "Short Desc (or USP)") }}</td>
+
+      <td>{{ range (index .fields "Wallet Support") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Selling") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Blockchain") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Required to sell") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Fee properties") }}{{.}}{{end}}</td>
+      <td>{{ (index .fields "IPFS") }}</td>
+      <td>{{ (index .fields "Fees") }}</td>
+      <td>{{ (index .fields "% of Sale") }}</td>
+      <td>{{ (index .fields "Secondary Sales") }}</td>
+      <td>{{range (index .fields "Control of sale") }}{{.}}{{end}}</td>
+      <td>{{ (index .fields "Credit Card?") }}</td>
+      <td>{{range (index .fields "Services") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Focus") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Token Support") }}{{.}}{{end}}</td>
+      <td>{{range (index .fields "Focus") }}{{.}}{{end}}</td>
+      <td>{{ (index .fields "Editions?")}}</td>
+      <td>{{ (index .fields "1/1")}}</td>
+      <td>{{ (index .fields "Notes") }}</td>
+      
+    </tr>
+    {{ end }}
+    </tbody>  
+    </table>  
+  </div>
+
+  {{ range $results.records }}
+    <tr {{ with .fields.Highlight }}class="table-danger" {{end}}>
+      {{ with .fields.Activity }}
+      <td>{{. }}</td>
+      {{end}} {{ with .fields.Micromorts }}
+      <td>{{. }}</td>
+      {{end}}
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
